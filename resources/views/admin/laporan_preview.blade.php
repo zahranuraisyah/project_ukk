@@ -47,16 +47,12 @@
                     <table class="w-full border-collapse border border-gray-300 mb-6">
                         <tr class="bg-purple-200">
                             <th class="border p-2">ID</th>
-                            <th class="border p-2">Barang</th>
-                            <th class="border p-2">Jumlah</th>
                             <th class="border p-2">Total Harga</th>
                             <th class="border p-2">Tanggal Transaksi</th>
                         </tr>
                         @foreach ($transaksi as $t)
                             <tr>
                                 <td class="border p-2">{{ $t->id }}</td>
-                                <td class="border p-2">{{ $t->barang->nama }}</td>
-                                <td class="border p-2">{{ $t->jumlah }}</td>
                                 <td class="border p-2">{{ $t->total_harga }}</td>
                                 <td class="border p-2">{{ $t->created_at }}</td>
                             </tr>

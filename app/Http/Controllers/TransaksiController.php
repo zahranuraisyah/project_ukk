@@ -183,5 +183,6 @@ class TransaksiController extends Controller
         $transaksi = Transaksi::with('detailTransaksi.barang')->findOrFail($id);
         return view('kasir.transaksi.detail', compact('transaksi'));
     }
-
+    
+    
 }

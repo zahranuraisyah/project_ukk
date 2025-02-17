@@ -5,25 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daftar Barang</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 20rem; /* 80px */
+            background-color: #a855f7; /* bg-purple-500 */
+            color: white;
+            padding: 1.5rem; /* 6px */
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem; /* 6px */
+        }
+        .content {
+            margin-left: 20rem; /* 80px */
+            padding: 1.5rem; /* 6px */
+            flex: 1;
+        }
+    </style>
 </head>
 <body class="bg-gray-100">
     <div class="flex h-screen">
         <!-- Sidebar -->
-        <aside class="w-80 bg-purple-500 text-white p-6 flex flex-col space-y-6 ">
+        <aside class="sidebar">
             <div class="flex items-center space-x-3">
                 <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-12 h-12 rounded-full">
-                <h2 class="text-lg font-bold ">Admin Panel</h2>
+                <h2 class="text-lg font-bold">Admin Panel</h2>
             </div>
             <nav class="flex flex-col space-y-4">
                 <a href="{{ route('admin.dashboard') }}" class="py-2 px-4 hover:bg-purple-700 text-lg rounded-md">Dashboard</a>
                 <a href="{{ route('barangs.index') }}" class="py-2 text-black px-4 text-lg font-semibold bg-white rounded-md">Products</a>
                 <a href="{{ route('admin.pembelian.index') }}" class="py-2 px-4 hover:bg-purple-700 text-lg rounded-md">Restock</a>
-                <a href="{{ route('admin.laporan.preview') }}" class="py-2 px-4 hover:bg-purple-700 text-lg rounded-md">Reprorts</a>
+                <a href="{{ route('admin.laporan.preview') }}" class="py-2 px-4 hover:bg-purple-700 text-lg rounded-md">Reports</a>
             </nav>
         </aside>
         
         <!-- Content -->
-        <div class="flex-1 flex flex-col">
+        <div class="content">
             <!-- Navbar -->
             <header class="bg-white shadow p-4 flex justify-between items-center">
                 <h1 class="text-2xl font-semibold">Daftar Barang</h1>
@@ -35,6 +55,12 @@
             
             <!-- Main Content -->
             <main class="p-6">
+
+                @if (session('error'))
+                    <div class="bg-red-100 text-red-800 p-3 rounded-md mb-4">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 @if (session('success'))
                     <div class="bg-green-100 text-green-800 p-3 rounded-md mb-4">
                         {{ session('success') }}

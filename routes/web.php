@@ -13,24 +13,21 @@ use App\Http\Controllers\PembelianController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\AdminDashboardController;
 
-// =======================
-// 📌 Halaman Utama (Welcome)
-// =======================
+//  Halaman Utama (Welcome)
 Route::get('/', function () {
     return view('landing');
 });
 
-// =======================
-// 📌 Register & Auth
-// =======================
+
+//  Register & Auth
+
 Route::get('/register', [RegisteredUserController::class, 'create'])->name('register.create');
 Route::post('/register', [RegisteredUserController::class, 'store'])->name('register.store');
 
 require __DIR__.'/auth.php'; // Load routes dari Laravel Breeze
 
-// =======================
-// 📌 Middleware: Hanya Pengguna yang Sudah Login
-// =======================
+
+// Middleware: Hanya Buat yang Sudah Login
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
@@ -44,9 +41,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/barangs', [BarangController::class, 'index'])->name('barangs.index');
 });
 
-// =======================
-// 📌 Middleware: Admin (Bisa CRUD Barang dan tambah stok)
-// =======================
+// Middleware: Admin (Bisa CRUD Barang dan tambah stok)
 Route::middleware(['auth', AdminMiddleware::class])->group(function () {
   //  Route::get('/admin', function () {
     //    return view('admin.dashboard');
@@ -68,9 +63,7 @@ Route::middleware(['auth', AdminMiddleware::class])->group(function () {
 
 });
 
-// =======================
-// 📌 Middleware: Kasir (Barang, Transaksi, Detail Transaksi)
-// =======================
+// Middleware: Kasir (Barang, Transaksi, Detail Transaksi)
 Route::middleware(['auth', UserMiddleware::class])->group(function () {
     // ✅ Dashboard Kasir
     Route::get('/kasir', [KasirDashboardController::class, 'index'])->name('kasir.dashboard');

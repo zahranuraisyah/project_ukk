@@ -38,10 +38,10 @@ class LaporanController extends Controller
     public function previewLaporan(Request $request)
     {
         $tanggal = $request->input('tanggal');
-
-        // Ambil transaksi, pembelian, dan stok sesuai tanggal yang dipilih
-        $transaksi = Transaksi::whereDate('tanggal', $tanggal)->get();
-        $pembelian = Pembelian::whereDate('created_at', $tanggal)->get();
+        $transaksi = Transaksi::with('barang')->whereDate('tanggal', $tanggal)->get();
+        $pembelian = Pembelian::with('barang')
+        ->whereDate('created_at', $tanggal)
+        ->get();   
         $stok = Barang::all(); // Stok tetap ambil semua
 
         return view('admin.laporan_preview', compact('transaksi', 'pembelian', 'stok', 'tanggal'));
